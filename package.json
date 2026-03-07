@@ -1,0 +1,39 @@
+{
+  "name": "e6r3-readiness-tool",
+  "version": "0.1.0",
+  "description": "AI-powered ICH E6(R3) transition readiness tool for clinical trial document compliance analysis",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "dev:netlify": "netlify dev",
+    "dev:vercel": "vercel dev"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "lucide-react": "^0.263.1",
+    "mammoth": "^1.11.0",
+    "multer": "^2.1.1",
+    "pdf-parse": "^2.4.5",
+    "pdf2json": "^4.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@vitejs/plugin-react": "^4.2.0",
+    "vite": "^5.0.0"
+  },
+  "keywords": [
+    "ich-e6-r3",
+    "gcp",
+    "clinical-trials",
+    "compliance",
+    "good-clinical-practice",
+    "regulatory"
+  ],
+  "author": "Steve Stork",
+  "license": "MIT"
+}
