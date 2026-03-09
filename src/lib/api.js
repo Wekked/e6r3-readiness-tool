@@ -1,7 +1,7 @@
 import { SYSTEM_PROMPT } from './prompts';
 
 // API endpoint — Express server running locally
-const API_URL = 'http://localhost:3001/api/analyze';
+const API_URL = window.location.hostname === 'localhost' ? 'http://localhost:3001/api/analyze' : '/api/analyze';
 
 /**
  * Call the API server to proxy to Anthropic

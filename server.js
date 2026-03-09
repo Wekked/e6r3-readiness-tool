@@ -1,11 +1,19 @@
 import express from 'express';
 import cors from 'cors';
-import { readFileSync } from 'fs';
+import { readFileSync, existsSync } from 'fs';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 import multer from 'multer';
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const envFile = readFileSync('.env', 'utf8');
-const apiKey = envFile.match(/ANTHROPIC_API_KEY=(.*)/)?.[1]?.trim();
+const envPath = join(__dirname, '.env');
+let apiKey = null;
+if (existsSync(envPath)) {
+  const envFile = readFileSync(envPath, 'utf8');
+  apiKey = envFile.match(/ANTHROPIC_API_KEY=(.*)/)?.[1]?.trim();
+}
+if (!apiKey) apiKey = process.env.ANTHROPIC_API_KEY;
 console.log('API key loaded:', apiKey ? 'yes' : 'NO');
 
 const app = express();
@@ -105,4 +113,13 @@ app.post('/api/analyze', async (req, res) => {
   }
 });
 
-app.listen(3001, () => console.log('API server running on http://localhost:3001'));
+// Serve frontend from dist/ (production build)
+const distPath = join(__dirname, 'dist');
+if (existsSync(distPath)) {
+  app.use(express.static(distPath));
+  app.get('/{0,}', (req, res) => res.sendFile(join(distPath, 'index.html')));
+  console.log('Serving frontend from dist/');
+}
+
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => console.log('Server running on http://localhost:' + PORT));

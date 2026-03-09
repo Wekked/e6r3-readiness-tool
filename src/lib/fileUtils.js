@@ -1,4 +1,4 @@
-const EXTRACT_URL = 'http://localhost:3001/api/extract';
+const EXTRACT_URL = window.location.hostname === 'localhost' ? 'http://localhost:3001/api/extract' : '/api/extract';
 
 /**
  * Read a file and extract its text content.
