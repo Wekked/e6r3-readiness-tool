@@ -71,35 +71,18 @@ npm install
 cp .env.example .env
 # Add your Anthropic API key to .env
 
-# Start development server
+# Start the API server (Terminal Tab 1)
+npm run server
+
+# Start the frontend dev server (Terminal Tab 2)
 npm run dev
 ```
 
-The app will be available at `http://localhost:5173`.
+The frontend will be at `http://localhost:5173` and the API server at `http://localhost:3001`.
 
-### Deploy to Netlify
-
-```bash
-# Install Netlify CLI
-npm i -g netlify-cli
-
-# Deploy
-netlify deploy --prod
-```
-
-Set the environment variable `ANTHROPIC_API_KEY` in your Netlify dashboard under Site Settings → Environment Variables.
-
-### Deploy to Vercel
-
-```bash
-# Install Vercel CLI
-npm i -g vercel
-
-# Deploy
-vercel --prod
-```
-
-Set `ANTHROPIC_API_KEY` in your Vercel project's Environment Variables.
+You need **both terminals running** for the app to work:
+- `npm run server` — handles PDF/DOCX text extraction and proxies API calls to Anthropic (keeps your key server-side)
+- `npm run dev` — serves the React frontend with hot reload
 
 ## Project Structure
 

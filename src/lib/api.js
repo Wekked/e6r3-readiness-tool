@@ -1,10 +1,10 @@
 import { SYSTEM_PROMPT } from './prompts';
 
-// API endpoint — detect environment and use correct path
+// API endpoint — Express server running locally
 const API_URL = 'http://localhost:3001/api/analyze';
 
 /**
- * Call the serverless API proxy to Anthropic
+ * Call the API server to proxy to Anthropic
  * @param {string} systemExtra - Additional system prompt context
  * @param {Array} userContent - Message content array
  * @returns {Object} Parsed JSON response

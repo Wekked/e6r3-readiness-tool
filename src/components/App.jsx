@@ -17,11 +17,15 @@ export default function App() {
   const [analyzeProgress, setAnalyzeProgress] = useState('');
 
   const analyzeDocuments = async () => {
+    console.log('[E6R3] Starting analysis, documents:', documents.length);
     setAnalyzing(true);
     const toAnalyze = documents.filter((d) => !d.analysis);
+    console.log('[E6R3] Documents to analyze:', toAnalyze.length);
     if (!toAnalyze.length) { setAnalyzing(false); return; }
 
     for (let i = 0; i < toAnalyze.length; i++) {
+  // Wait between requests to avoid rate limiting
+      if (i > 0) await new Promise(r => setTimeout(r, 30000));
       const doc = toAnalyze[i];
       setAnalyzeProgress(`Analyzing ${doc.fileName} (${i + 1}/${toAnalyze.length})...`);
       try {

@@ -3,6 +3,7 @@ import cors from 'cors';
 import { readFileSync } from 'fs';
 import multer from 'multer';
 
+
 const envFile = readFileSync('.env', 'utf8');
 const apiKey = envFile.match(/ANTHROPIC_API_KEY=(.*)/)?.[1]?.trim();
 console.log('API key loaded:', apiKey ? 'yes' : 'NO');
@@ -57,7 +58,7 @@ app.post('/api/extract', upload.single('file'), async (req, res) => {
       return res.status(400).json({ error: 'Unsupported file type. Use PDF, DOCX, or TXT.' });
     }
 
-    const MAX_CHARS = 300000;
+    const MAX_CHARS = 80000;
     if (text.length > MAX_CHARS) {
       console.log('Truncating from', text.length, 'to', MAX_CHARS, 'chars');
       text = text.substring(0, MAX_CHARS) + '\n\n[... document truncated due to length ...]';
